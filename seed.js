@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const connectDB = require('./config/db');
 const Crop = require('./models/Crop');
 const Fertilizer = require('./models/Fertilizer');
 const Weather = require('./models/Weather');
@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const seedData = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || process.env.MONGO_URI || 'mongodb://localhost:27017/smart-yield');
+    await connectDB();
     
     console.log('🌱 Starting database seeding...');
 

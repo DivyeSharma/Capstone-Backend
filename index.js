@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
@@ -26,9 +25,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI || process.env.MONGO_URI || 'mongodb://localhost:27017/smart-yield')
-  .then(() => console.log('✓ MongoDB connected'))
-  .catch(err => console.log('✗ MongoDB connection error:', err));
+const connectDB = require('./config/db');
+connectDB();
 
 // API Routes
 app.use('/api/auth', require('./routes/auth'));
