@@ -23,6 +23,19 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// Root route
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Smart Yield Backend Running"
+  });
+});
+// Health route
+app.get("/health", (req, res) => {
+  res.json({
+    status: "ok"
+  });
+});
 
 // MongoDB Connection
 const connectDB = require('./config/db');
@@ -41,22 +54,7 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'Server is running', timestamp: new Date() });
 });
 
-// Root endpoint
-app.get('/', (req, res) => {
-  res.json({ 
-    message: 'Smart Yield API Server',
-    version: '1.0.0',
-    endpoints: {
-      auth: '/api/auth',
-      crops: '/api/crops',
-      fertilizers: '/api/fertilizers',
-      queries: '/api/queries',
-      weather: '/api/weather',
-      users: '/api/users',
-      health: '/api/health',
-    }
-  });
-});
+// Duplicate root endpoint removed to avoid conflict
 
 // 404 handler
 app.use((req, res) => {
@@ -71,8 +69,6 @@ app.use((req, res) => {
 const errorHandler = require('./middleware/errorHandler');
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`🚀 Smart Yield Server listening on port ${PORT}`);
-  console.log(`📍 http://127.0.0.1:${PORT}`);
-  console.log(`📚 API Documentation: http://127.0.0.1:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
 });
