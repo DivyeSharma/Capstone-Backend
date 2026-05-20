@@ -7,9 +7,19 @@ const PORT = process.env.PORT || 8080;
 
 // Middleware - CORS
 app.use(cors({
-  origin: [
-    "https://capstone-frontend-roan.vercel.app"
-  ],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like curl)
+    if (!origin) return callback(null, true);
+    
+    // Allow vercel frontend and localhost
+    if (origin.includes('capstone-frontend-roan.vercel.app') || 
+        origin.includes('localhost') || 
+        origin.includes('127.0.0.1')) {
+      return callback(null, true);
+    }
+    
+    return callback(null, false); // Don't throw error, just block
+  },
   credentials: true
 }));
 app.use(express.json());
