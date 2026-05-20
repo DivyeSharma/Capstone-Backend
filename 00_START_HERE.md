@@ -95,7 +95,7 @@ npm run seed    # First time: seed database
 npm run dev     # Start development server
 ```
 
-**Server URL**: `http://localhost:5000`
+**Server URL**: `http://127.0.0.1:8080`
 
 ---
 
@@ -287,10 +287,10 @@ npm run dev     # Start development server
 ### Option 1: Using curl
 ```bash
 # Get all crops
-curl http://localhost:5000/api/crops
+curl http://127.0.0.1:8080/api/crops
 
 # Register user
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://127.0.0.1:8080/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{"name":"Farmer","email":"farmer@example.com","password":"pass123","state":"Maharashtra","district":"Nashik","soilType":"Black Soil"}'
 ```
@@ -304,7 +304,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 Update `src/services/api.ts`:
 ```typescript
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api'
+  baseURL: 'http://127.0.0.1:8080/api'
 });
 ```
 
@@ -313,11 +313,11 @@ const api = axios.create({
 ## ⚙️ ENVIRONMENT CONFIGURATION
 
 ```env
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/smart-yield
+PORT=8080
+MONGO_URI=process.env.MONGO_URI
 JWT_SECRET=your_jwt_secret_key
 NODE_ENV=development
-CORS_ORIGIN=http://localhost:5173
+CORS_ORIGIN=http://127.0.0.1:5173
 ```
 
 ---
@@ -379,7 +379,7 @@ Connect frontend authentication with backend
 | Item | Value |
 |------|-------|
 | **Server Port** | 5000 |
-| **Database** | MongoDB (localhost:27017) |
+| **Database** | MongoDB (Atlas / MONGO_URI) |
 | **Database Name** | smart-yield |
 | **Framework** | Express.js |
 | **Authentication** | JWT (7 days) |

@@ -61,11 +61,11 @@ npm install
 ### Step 2: Configure Environment
 Update `.env` file:
 ```env
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/smart-yield
+PORT=8080
+MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/smartyield
 JWT_SECRET=your_secure_secret_key_here
 NODE_ENV=development
-CORS_ORIGIN=http://localhost:5173
+CORS_ORIGIN=http://127.0.0.1:5173
 ```
 
 ### Step 3: Start MongoDB
@@ -91,7 +91,7 @@ npm run dev
 npm start
 ```
 
-Server will be available at: `http://localhost:5000`
+Server will be available at: `http://127.0.0.1:8080`
 
 ---
 
@@ -254,22 +254,22 @@ Server will be available at: `http://localhost:5000`
 ### Quick Test (No Auth Required)
 ```bash
 # Get all crops
-curl http://localhost:5000/api/crops
+curl http://127.0.0.1:8080/api/crops
 
 # Get crop recommendations
-curl "http://localhost:5000/api/crops/recommend?soilType=Black%20Soil"
+curl "http://127.0.0.1:8080/api/crops/recommend?soilType=Black%20Soil"
 
 # Get weather
-curl http://localhost:5000/api/weather
+curl http://127.0.0.1:8080/api/weather
 
 # Health check
-curl http://localhost:5000/api/health
+curl http://127.0.0.1:8080/api/health
 ```
 
 ### Register & Login Test
 ```bash
 # Register
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://127.0.0.1:8080/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Test Farmer",
@@ -281,7 +281,7 @@ curl -X POST http://localhost:5000/api/auth/register \
   }'
 
 # Login (copy token from response)
-curl -X POST http://localhost:5000/api/auth/login \
+curl -X POST http://127.0.0.1:8080/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "test@example.com",
@@ -290,7 +290,7 @@ curl -X POST http://localhost:5000/api/auth/login \
 
 # Use token in protected routes
 curl -H "Authorization: Bearer YOUR_TOKEN_HERE" \
-  http://localhost:5000/api/auth/profile
+  http://127.0.0.1:8080/api/auth/profile
 ```
 
 ---
@@ -323,7 +323,7 @@ curl -H "Authorization: Bearer YOUR_TOKEN_HERE" \
 In `src/services/api.ts`:
 ```typescript
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'http://127.0.0.1:8080/api',
   timeout: 10000,
 });
 ```

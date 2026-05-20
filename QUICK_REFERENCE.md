@@ -9,7 +9,7 @@ npm run seed          # Optional: seed database
 npm run dev           # Start development server
 ```
 
-**URL**: `http://localhost:5000`
+**URL**: `http://127.0.0.1:8080`
 
 ---
 
@@ -17,12 +17,12 @@ npm run dev           # Start development server
 
 ### 1️⃣ Get All Crops (No Auth Required)
 ```bash
-curl http://localhost:5000/api/crops
+curl http://127.0.0.1:8080/api/crops
 ```
 
 ### 2️⃣ Register User
 ```bash
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://127.0.0.1:8080/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Farmer Name",
@@ -36,7 +36,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 
 ### 3️⃣ Login
 ```bash
-curl -X POST http://localhost:5000/api/auth/login \
+curl -X POST http://127.0.0.1:8080/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "farmer@example.com",
@@ -48,7 +48,7 @@ curl -X POST http://localhost:5000/api/auth/login \
 ### 4️⃣ Use Token (Protected Routes)
 ```bash
 curl -H "Authorization: Bearer YOUR_TOKEN_HERE" \
-  http://localhost:5000/api/auth/profile
+  http://127.0.0.1:8080/api/auth/profile
 ```
 
 ---
@@ -91,7 +91,7 @@ server/
 | Item | Value |
 |------|-------|
 | **Port** | 5000 |
-| **Database** | MongoDB (localhost:27017) |
+| **Database** | MongoDB (Atlas / MONGO_URI) |
 | **Database Name** | smart-yield |
 | **JWT Expiry** | 7 days |
 | **Password Hash** | bcrypt (10 rounds) |
@@ -102,11 +102,11 @@ server/
 ## Environment Variables (.env)
 
 ```env
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/smart-yield
+PORT=8080
+MONGO_URI=process.env.MONGO_URI
 JWT_SECRET=your_jwt_secret_key
 NODE_ENV=development
-CORS_ORIGIN=http://localhost:5173
+CORS_ORIGIN=http://127.0.0.1:5173
 ```
 
 ---
@@ -116,7 +116,7 @@ CORS_ORIGIN=http://localhost:5173
 | Problem | Solution |
 |---------|----------|
 | MongoDB connection error | Ensure MongoDB is running: `mongod` |
-| Port 5000 in use | Change PORT in .env or kill process |
+| Port 8080 in use | Change PORT in .env or kill process |
 | CORS error | Check CORS_ORIGIN in .env matches frontend |
 | JWT token invalid | Ensure token format: `Bearer <token>` |
 | Seed fails | Check MongoDB connection, verify schemas |
@@ -188,7 +188,7 @@ npm run seed         # Seed database
 Update `src/services/api.ts`:
 ```typescript
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api'
+  baseURL: 'http://127.0.0.1:8080/api'
 });
 ```
 

@@ -79,7 +79,7 @@ npm run seed
 npm run dev
 ```
 
-**Server running at**: `http://localhost:5000`
+**Server running at**: `http://127.0.0.1:8080`
 
 ---
 
@@ -221,10 +221,10 @@ When you run `npm run seed`, the database will be populated with:
 ### Using curl
 ```bash
 # Test public endpoint
-curl http://localhost:5000/api/crops
+curl http://127.0.0.1:8080/api/crops
 
 # Register user
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://127.0.0.1:8080/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Test Farmer",
@@ -272,11 +272,11 @@ curl -X POST http://localhost:5000/api/auth/register \
 ## ⚙️ Environment Configuration
 
 ```env
-PORT=5000                                          # Server port
-MONGODB_URI=mongodb://localhost:27017/smart-yield # Database
+PORT=8080                                          # Server port
+MONGO_URI=process.env.MONGO_URI                  # Database
 JWT_SECRET=your_jwt_secret_key                    # JWT signing key
 NODE_ENV=development                              # Environment
-CORS_ORIGIN=http://localhost:5173                # Frontend URL
+CORS_ORIGIN=http://127.0.0.1:5173                # Frontend URL
 ```
 
 ---
@@ -375,7 +375,7 @@ All errors follow this format:
 In `src/services/api.ts`:
 ```typescript
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'http://127.0.0.1:8080/api',
   timeout: 10000,
 });
 ```

@@ -23,11 +23,11 @@ npm install
 
 3. **Configure environment variables** in `.env`:
 ```env
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/smart-yield
+PORT=8080
+MONGO_URI=process.env.MONGO_URI
 JWT_SECRET=your_jwt_secret_key_change_in_production
 NODE_ENV=development
-CORS_ORIGIN=http://localhost:5173
+CORS_ORIGIN=http://127.0.0.1:5173
 ```
 
 4. **Seed database with mock data**:
@@ -41,7 +41,7 @@ npm run dev    # Development with auto-reload
 npm start      # Production mode
 ```
 
-Server will run on `http://localhost:5000`
+Server will run on `http://127.0.0.1:8080`
 
 ---
 
@@ -186,13 +186,13 @@ This will:
 ### Using cURL
 ```bash
 # Get all crops
-curl http://localhost:5000/api/crops
+curl http://127.0.0.1:8080/api/crops
 
 # Get crop recommendations
-curl http://localhost:5000/api/crops/recommend?soilType=Black%20Soil
+curl http://127.0.0.1:8080/api/crops/recommend?soilType=Black%20Soil
 
 # Register
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://127.0.0.1:8080/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "name": "John Farmer",
@@ -221,7 +221,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 - `CORS_ORIGIN`: Frontend URL for CORS
 
 ### MongoDB Connection
-- Local: `mongodb://localhost:27017/smart-yield`
+- Local: process.env.MONGO_URI
 - Atlas: `mongodb+srv://username:password@cluster.mongodb.net/smart-yield`
 
 ---

@@ -190,8 +190,8 @@
 ## ⚙️ Configuration Ready
 
 ```
-✅ Port: 5000
-✅ MongoDB: mongodb://localhost:27017/smart-yield
+✅ Port: 8080
+✅ MongoDB: Cloud MongoDB Atlas Configured (via MONGO_URI)
 ✅ JWT Secret: Configured
 ✅ CORS: Configured for frontend
 ✅ Error Handling: Centralized
@@ -305,7 +305,7 @@ Your backend is fully functional without these!
 ## 🔄 Frontend Integration Ready
 
 ### What Frontend Needs to Do
-1. Update API URL to `http://localhost:5000/api`
+1. Update API URL to `http://127.0.0.1:8080/api`
 2. Store JWT token in localStorage
 3. Include token in Authorization header
 4. Handle 401 errors for token expiry

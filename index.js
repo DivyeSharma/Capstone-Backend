@@ -3,7 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 
 // Middleware
 const allowedOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [];
@@ -73,6 +73,6 @@ app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`🚀 Smart Yield Server listening on port ${PORT}`);
-  console.log(`📍 http://localhost:${PORT}`);
-  console.log(`📚 API Documentation: http://localhost:${PORT}`);
+  console.log(`📍 http://127.0.0.1:${PORT}`);
+  console.log(`📚 API Documentation: http://127.0.0.1:${PORT}`);
 });
