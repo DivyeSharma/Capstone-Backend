@@ -5,22 +5,13 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// Middleware
-const allowedOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [];
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true); // Allow server-to-server or Postman
-    if (process.env.NODE_ENV !== 'production') return callback(null, true); // Dev mode
-    if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes('*')) {
-      return callback(null, true);
-    } else {
-      return callback(new Error('CORS blocked this request in production'));
-    }
-  },
-  credentials: true,
-  optionsSuccessStatus: 200
-};
-app.use(cors(corsOptions));
+// Middleware - CORS
+app.use(cors({
+  origin: [
+    "https://capstone-frontend-roan.vercel.app"
+  ],
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // Root route
@@ -68,6 +59,13 @@ app.use((req, res) => {
 // Error handling middleware
 const errorHandler = require('./middleware/errorHandler');
 app.use(errorHandler);
+process.on("unhandledRejection", (err) => {
+  console.error("Unhandled Rejection:", err);
+});
+
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught Exception:", err);
+});
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);

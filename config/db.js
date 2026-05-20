@@ -6,9 +6,8 @@ const connectDB = async () => {
     console.log('✓ MongoDB connected');
   } catch (error) {
     console.error('✗ MongoDB connection error:', error.message);
-    if (process.env.NODE_ENV === 'production') {
-      process.exit(1);
-    }
+    // Do NOT crash Railway app
+    // Keep server alive even if DB reconnects later
   }
 };
 
